@@ -1,0 +1,172 @@
+\documentclass{article}
+
+%preamble
+\usepackage{pdfpages}
+\usepackage{lipsum}
+\usepackage[margin=1in,includefoot]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+%\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[none]{hyphenat}
+\usepackage{xfrac}
+\usepackage{pgfplots}
+\newlength\figureheight
+\newlength\figurewidth	
+\usepackage{gensymb}
+\usepackage{pdfpages}
+\usepackage{overcite}
+\usepackage{tabularx}
+\usepackage{amsmath}
+% gets rid of spacing between items in a list
+\usepackage{enumitem}
+\setlist{noitemsep}
+\usepackage{subcaption}
+\usepackage{pdflscape}
+% Get matlab code in
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+% Gets references in toc, can't be used with natbib
+\usepackage[nottoc]{tocbibind}
+
+% Algorithms
+\usepackage[]{algorithm2e}
+\usepackage{mdframed}
+
+% Title spacing
+\usepackage{titlesec}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+% Table of contents spacing
+\usepackage{tocloft}
+\setlength\cftparskip{-2pt}
+
+\begin{document}
+
+\begin{titlepage}
+	\includepdf[pages={1}]{Coversheets/coverSheet.pdf}
+\end{titlepage}
+\cleardoublepage	
+\begin{titlepage}
+	\begin{center}
+		
+		\vspace{2cm}
+		\line(1,0){400}\\
+		[1cm]
+		\huge{\bfseries Title for Assignment}\\
+		[2mm]
+		\line(1,0){400}\\
+		[1.5cm]
+		\textsc{\LARGE SUBJ1234 Assignment X}\\
+	\vspace{11.75cm}
+		\textsc{\large Tara Bartlett 450198331}
+	\end{center}
+\end{titlepage}
+
+\pagenumbering{roman}
+
+\section*{Abstract}
+
+\newpage
+\tableofcontents
+\cleardoublepage
+
+
+\pagenumbering{arabic}
+\setcounter{page}1
+
+\newpage
+% main body stuff
+
+\section{Introduction}
+
+\subsection{Aim}
+
+\newpage
+\section{Literature Review}
+Before starting the project, it was important to comprehensively understand what issues are being faced by systems controlled in similar ways to $AIRUS$, and what solutions are already available.
+
+\subsection{Inserting a figure} Figure \ref{example}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.8\textwidth]{Figures/Example}
+	\caption{Example Figure}
+	\label{example}
+\end{figure}
+
+\subsection{Referencing \cite{litRev2}}
+\subsection{Table}
+Table \ref{Table} is a table. Use latex table generator
+
+\begin{table}[H]
+	\centering
+	\raggedright
+	\begin{tabular}{ | p{0.17\linewidth} |
+			p{0.275\linewidth} |
+			p{0.15\linewidth} |
+			p{0.35\linewidth} | } 
+		\hline
+		\textbf{Variable Name} & \textbf{Definition} & \textbf{Initialization}   & \textbf{Application}    \\ \hline
+		\textit{dtTelem}                & Time between telemetry being sent and received                     & User input to parent file & Compensated for in the prediction, used to calculate expected current position                                                                                              \\ \hline
+		\textit{dtControlReceived}      & Time between control being sent and received                       & User input to parent file & Used in the prediction to find position of green dot, represents the lag in the system                                                                                      \\ \hline
+		\textit{dtControlActed}         & Time taken for commanded velocity to be implemented, once received & User input to parent file & The reciprocal of this is used as the proportional gain constant in the PD controller                                                                                   \\ \hline
+		\textit{dtEuler}                & Shorter time step used for Euler integration in predictor          & Defined in predictor      & Used to iterate through the displacement and velocity prediction calculations in each loop of the system                                                                \\ \hline
+		\textit{dt\_i}                  & Time taken for each iteration                                      & Calculated in parent file & Represents the time taken for each iteration in the simulation, used in many functions in the system to find the number of iterations that corresponds to a given delay \\ \hline
+		\textit{timeTaken}              & Total time taken for the red dot to reach the end of the plot      & Calculated in parent file & The total time taken for the pilot to move the red dot from the initial position to the final position                                                                  \\ \hline
+	\end{tabular}
+	\caption{Definition of Time Parameters}
+	\label{Table}
+\end{table}
+
+
+
+\subsection{subfigures}
+
+		\begin{figure}[H]
+			\begin{subfigure}[b]{0.5\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{Figures/Example}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.5\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{Figures/Example}
+			\end{subfigure}
+			\vfill
+			\begin{subfigure}[b]{0.5\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{Figures/Example}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.5\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{Figures/Example}
+			\end{subfigure}
+			\caption{Example subfigures}
+			\label{subfig}
+		\end{figure}
+
+\newpage
+
+\section{Conclusion}
+
+
+\newpage
+\pagenumbering{roman}
+\setcounter{page}1
+\bibliographystyle{aiaa}
+\bibliography{Bibliography}
+
+\newpage
+\section{Appendix}
+\subsection{\textsc{Matlab} Code}
+
+\noindent\textbf{Figure Formatting}
+
+\lstinputlisting{MATLAB/formatFigure.m}
+
+\end{document}
